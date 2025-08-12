@@ -1,11 +1,115 @@
+import 'package:dome_ui2/dialog/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../view/home_page_tab_bar.dart';
+import '../dio/dio.dart';
+import '../model/User.dart';
 import 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
-  SignUpCubit() : super(const SignUpState());
+  SignUpCubit() : super(SignUpInitial());
+
+  Future<void> updateUser(String id, Map<String, dynamic> data) async {
+    emit(SignUpLoading());
+    try {
+      final response = await DioClient.dio.put(
+        'users/$id',
+        data: data,
+      );
+
+      if (response.statusCode == 200) {
+        final updatedUser = UserModel.fromJson(response.data);
+        emit(SignUpSuccess("Cập nhật thành công", [updatedUser]));
+      } else {
+        emit(SignUpError("Cập nhật thất bại"));
+      }
+    } catch (e) {
+      emit(SignUpError(e.toString()));
+    }
+  }
+
+  Future<void> getListData() async {
+    emit(SignUpLoading());
+    try {
+      final response = await DioClient.dio.get('users');
+
+      if (response.statusCode == 200 && response.data is List) {
+        final users = (response.data as List)
+            .map((e) => UserModel.fromJson(e))
+            .toList();
+        emit(SignUpSuccess("Thành công", users));
+      } else {
+        emit(SignUpError("Lỗi dữ liệu"));
+      }
+    } catch (e) {
+      emit(SignUpError(e.toString()));
+    }
+  }
+
+  Future<UserModel> getUserById(String id) async {
+    try {
+      final response = await DioClient.dio.get(
+        'users',
+        queryParameters: {"id": id},
+      );
+
+      if (response.statusCode == 200 &&
+          response.data is List &&
+          response.data.isNotEmpty) {
+        return UserModel.fromJson(response.data[0]);
+      }
+      return UserModel(name: "", avatar: "", email: "", password: "", id: "");
+    } catch (e) {
+      throw Exception("Lỗi khi lấy user: $e");
+    }
+  }
+
+  Future<void> login(String email, String password) async {
+    emit(SignUpLoading());
+    try {
+      // Gọi GET để tìm user theo email
+      final response = await DioClient.dio.get(
+        'users',
+        queryParameters: {"email": email},
+      );
+
+      if (response.statusCode == 200 &&
+          response.data is List &&
+          response.data.isNotEmpty) {
+        final user = response.data[0];
+        final List<UserModel> list = [];
+        if (user['password'] == password) {
+          emit(SignUpSuccess("Đăng nhập thành công!", list));
+        } else {
+          emit(SignUpError("Sai mật khẩu!"));
+        }
+      } else {
+        emit(SignUpError("Không tìm thấy tài khoản!"));
+      }
+    } catch (e) {
+      emit(SignUpError("Lỗi: ${e.toString()}"));
+    }
+  }
+
+  Future<void> register(String email, String password) async {
+    emit(SignUpLoading());
+    try {
+      final response = await DioClient.dio.post(
+        'users', // endpoint của MockAPI
+        data: {"email": email, "password": password},
+      );
+
+      final List<UserModel> list = [];
+
+      if (response.statusCode == 201) {
+        emit(SignUpSuccess("Đăng ký thành công!", list));
+      } else {
+        emit(SignUpError("Đăng ký thất bại!"));
+      }
+    } catch (e) {
+      emit(SignUpError("Lỗi: ${e.toString()}"));
+    }
+  }
 
   void changeData(String value) {
     if (value == "") {
@@ -55,44 +159,12 @@ class SignUpCubit extends Cubit<SignUpState> {
     }
   }
 
-  void signUp(BuildContext context) {
+  void signUp(BuildContext context, String email, String password) {
     if (state.errorEmail == null && (state.errorText == "")) {
       emit(state.copyWith(isSignUpSuccess: true));
-      showLoginSuccessDialog(context);
-    }
-  }
+      context.read<SignUpCubit>().register(email, password);
 
-  void showLoginSuccessDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          title: const Text('Thành công', textAlign: TextAlign.center),
-          content: const Text(
-            'Đăng nhập thành công!',
-            textAlign: TextAlign.center,
-          ),
-          actionsAlignment: MainAxisAlignment.center,
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Đóng dialog
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (context) => MyHomePage(currentTab: 0),
-                  ),
-                  (Route<dynamic> route) => false,
-                );
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
+      ShowDialog().showLoginSuccessDialog(context);
+    }
   }
 }

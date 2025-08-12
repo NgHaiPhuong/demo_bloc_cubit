@@ -1,9 +1,10 @@
 import 'package:dome_ui2/bloc/sign_up_bloc.dart';
 import 'package:dome_ui2/bloc/sign_up_state.dart';
 import 'package:dome_ui2/color/color.dart';
+import 'package:dome_ui2/dialog/dialog.dart';
 import 'package:dome_ui2/view/forgot_password.dart';
 import 'package:dome_ui2/view/home_page_tab_bar.dart';
-import 'package:dome_ui2/view/successful.dart';
+import 'package:dome_ui2/view/show_list_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,12 +17,25 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPage extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => SignUpCubit(),
-      child: BlocBuilder<SignUpCubit, SignUpState>(
+      child: BlocConsumer<SignUpCubit, SignUpState>(
+        listener: (context, state) {
+          if (state is SignUpSuccess) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ShowListUserPage(),
+              ),
+            );
+          } else if (state is SignUpError){
+            ShowDialog().showFailLogInDialog(context);
+          }
+        },
         builder: (context, state) {
           final cubit = context.read<SignUpCubit>();
 
@@ -41,6 +55,7 @@ class _LoginPage extends State<LoginPage> {
                     ),
                     SizedBox(height: 12),
                     TextField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                         hintText: "Enter your email",
                         hintStyle: TextStyle(color: AppColor.color_B3B3B3),
@@ -159,12 +174,11 @@ class _LoginPage extends State<LoginPage> {
                       height: 56,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SuccessfulPage(),
-                            ),
-                          );
+                          final email = _emailController.text.trim();
+                          final password = _passwordController.text.trim();
+                          context.read<SignUpCubit>().login(email, password);
+
+
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColor.color_648DDB, // Màu nền

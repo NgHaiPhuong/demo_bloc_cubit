@@ -14,6 +14,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPage extends State<SignUpPage> {
   TextEditingController enterPassController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController re_enterPassController = TextEditingController();
 
   @override
@@ -36,6 +37,7 @@ class _SignUpPage extends State<SignUpPage> {
                   ),
                   SizedBox(height: 12),
                   TextField(
+                    controller: emailController,
                     onChanged: cubit.validateEmail,
                     decoration: InputDecoration(
                       errorText: state.errorEmail,
@@ -100,7 +102,11 @@ class _SignUpPage extends State<SignUpPage> {
                     width: double.infinity,
                     height: 56,
                     child: ElevatedButton(
-                      onPressed: () => cubit.signUp(context),
+                      onPressed: () {
+                        final email = emailController.text.trim();
+                        final password = enterPassController.text.trim();
+                        cubit.signUp(context, email, password);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColor.color_648DDB, // Màu nền
                         foregroundColor: Colors.white, // Màu chữ

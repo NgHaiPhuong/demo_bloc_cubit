@@ -1,3 +1,6 @@
+
+import '../model/User.dart';
+
 class SignUpState {
   final bool obscureTextPass;
   final bool obscureTextRePass;
@@ -36,4 +39,23 @@ class SignUpState {
       isHide: isHide ?? this.isHide,
     );
   }
+}
+
+class SignUpInitial extends SignUpState {}
+
+class SignUpLoading extends SignUpState {}
+
+class SignUpSuccess extends SignUpState {
+  final String message;
+  final List<UserModel> users;
+
+  SignUpSuccess(this.message, this.users);
+
+  @override
+  List<Object?> get props => [users];
+}
+
+class SignUpError extends SignUpState {
+  final String error;
+  SignUpError(this.error);
 }
