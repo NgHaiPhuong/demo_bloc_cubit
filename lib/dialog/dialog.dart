@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../view/home_page_tab_bar.dart';
+import '../screen/home_page_tab_bar.dart';
 
 class ShowDialog {
-
   void showFailLogInDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -38,7 +37,7 @@ class ShowDialog {
     );
   }
 
-  void showLoginSuccessDialog(BuildContext context) {
+  void showLoginSuccessDialog(BuildContext context, String text) {
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -48,21 +47,12 @@ class ShowDialog {
             borderRadius: BorderRadius.circular(12),
           ),
           title: const Text('Thành công', textAlign: TextAlign.center),
-          content: const Text(
-            'Đăng nhập thành công!',
-            textAlign: TextAlign.center,
-          ),
+          content: Text(text, textAlign: TextAlign.center),
           actionsAlignment: MainAxisAlignment.center,
           actions: [
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Đóng dialog
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (context) => MyHomePage(currentTab: 0),
-                  ),
-                  (Route<dynamic> route) => false,
-                );
               },
               child: const Text('OK'),
             ),

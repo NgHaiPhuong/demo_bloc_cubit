@@ -1,5 +1,5 @@
 
-import '../model/User.dart';
+import '../../model/user.dart';
 
 class SignUpState {
   final bool obscureTextPass;

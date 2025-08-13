@@ -1,8 +1,8 @@
-import 'package:dome_ui2/view/login_page.dart';
-import 'package:dome_ui2/view/sign_up_page.dart';
+import 'package:dome_ui2/screen/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
 import '../color/color.dart';
+import 'login_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.currentTab});
