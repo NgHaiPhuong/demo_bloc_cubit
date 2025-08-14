@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../dio/dio.dart';
-import '../../model/user.dart';
+import '../../data/models/user.dart';
 import 'edit_user_state.dart';
 
 class EditUserCubit extends Cubit<EditUserState> {

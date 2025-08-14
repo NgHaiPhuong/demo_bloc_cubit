@@ -1,5 +1,5 @@
 import 'package:dome_ui2/bloc/forgot_bloc/forgot_bloc.dart';
-import 'package:dome_ui2/color/color.dart';
+import 'package:dome_ui2/core/utils/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

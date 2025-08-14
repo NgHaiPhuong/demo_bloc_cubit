@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../dio/dio.dart';
-import '../../model/user.dart';
+import '../../data/models/user.dart';
 import 'log_in_state.dart';
 
 class LogInCubit extends Cubit<LogInState> {

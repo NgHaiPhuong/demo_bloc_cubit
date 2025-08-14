@@ -2,7 +2,7 @@ import 'package:dome_ui2/bloc/show_list_bloc/show_list_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../dio/dio.dart';
-import '../../model/user.dart';
+import '../../data/models/user.dart';
 
 class ShowListCubit extends Cubit<ShowListState> {
   ShowListCubit() : super(ShowListInitial());

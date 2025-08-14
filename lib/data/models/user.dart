@@ -13,7 +13,6 @@ class UserModel {
     required this.id,
   });
 
-  /// Parse từ JSON -> Object
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       name: json['name'] ?? '',
@@ -24,7 +23,6 @@ class UserModel {
     );
   }
 
-  /// Convert từ Object -> JSON
   Map<String, dynamic> toJson() {
     return {
       'name': name,

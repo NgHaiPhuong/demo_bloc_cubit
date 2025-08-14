@@ -1,4 +1,4 @@
-import '../../model/user.dart';
+import '../../data/models/user.dart';
 
 class ForgotState {
   final bool isHide;

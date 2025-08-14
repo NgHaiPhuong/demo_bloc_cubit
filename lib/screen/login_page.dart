@@ -1,5 +1,5 @@
 import 'package:dome_ui2/bloc/log_in_bloc/log_in_state.dart';
-import 'package:dome_ui2/color/color.dart';
+import 'package:dome_ui2/core/utils/color.dart';
 import 'package:dome_ui2/dialog/dialog.dart';
 import 'package:dome_ui2/screen/show_list_user.dart';
 import 'package:flutter/material.dart';

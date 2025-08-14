@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/edit_user_bloc/edit_user_bloc.dart';
 import '../bloc/edit_user_bloc/edit_user_state.dart';
-import '../color/color.dart';
-import '../model/user.dart';
+import '../core/utils/color.dart';
+import '../data/models/user.dart';
 
 class EditUserPage extends StatefulWidget {
   const EditUserPage({super.key, required this.userModel});

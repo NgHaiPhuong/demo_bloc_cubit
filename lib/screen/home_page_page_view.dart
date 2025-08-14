@@ -1,4 +1,4 @@
-import 'package:dome_ui2/color/color.dart';
+import 'package:dome_ui2/core/utils/color.dart';
 import 'package:dome_ui2/screen/sign_up_page.dart';
 import 'package:flutter/material.dart';
 

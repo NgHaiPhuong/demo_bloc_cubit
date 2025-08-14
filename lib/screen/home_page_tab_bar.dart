@@ -1,7 +1,7 @@
 import 'package:dome_ui2/screen/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
-import '../color/color.dart';
+import '../core/utils/color.dart';
 import 'login_page.dart';
 
 class MyHomePage extends StatefulWidget {

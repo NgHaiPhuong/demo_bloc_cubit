@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/sign_up_bloc/sign_up_state.dart';
-import '../color/color.dart';
+import '../core/utils/color.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
