@@ -33,7 +33,6 @@ class _EditUserPage extends State<EditUserPage> {
   Widget build(BuildContext context) {
     final provider = context.watch<EditUserProvider>();
 
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (provider.message == "Cập nhật thành công") {
         Navigator.pop(context);

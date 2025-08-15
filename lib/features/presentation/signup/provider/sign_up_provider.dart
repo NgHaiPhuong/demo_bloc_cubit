@@ -1,9 +1,7 @@
 
-import 'package:dome_ui2/core/utils/dialog.dart';
 import 'package:dome_ui2/features/data/models/user.dart';
 import 'package:dome_ui2/features/domain/usecases/sign_up.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpProvider extends ChangeNotifier{
   final SignUpUserCase signUpUserCase;
