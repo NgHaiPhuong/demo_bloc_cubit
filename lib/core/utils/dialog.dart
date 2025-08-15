@@ -1,6 +1,5 @@
+import 'package:dome_ui2/features/presentation/home/screen/home_page_tab_bar.dart';
 import 'package:flutter/material.dart';
-
-import '../screen/home_page_tab_bar.dart';
 
 class ShowDialog {
   void showFailLogInDialog(BuildContext context) {

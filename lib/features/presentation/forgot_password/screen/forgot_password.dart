@@ -3,7 +3,7 @@ import 'package:dome_ui2/core/utils/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/forgot_bloc/forgot_state.dart';
+import '../../../bloc/forgot_bloc/forgot_state.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});

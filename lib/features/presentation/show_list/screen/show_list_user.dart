@@ -3,7 +3,7 @@ import 'package:dome_ui2/bloc/show_list_bloc/show_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'edit_user.dart';
+import '../../edit_user/screen/edit_user.dart';
 
 class ShowListUserPage extends StatefulWidget {
   const ShowListUserPage({super.key});

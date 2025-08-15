@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/log_in_bloc/log_in_bloc.dart';
 import '../bloc/sign_up_bloc/sign_up_state.dart';
-import 'forgot_password.dart';
-import 'home_page_tab_bar.dart';
+import '../presentation/forgot_password/screen/forgot_password.dart';
+import '../presentation/home/screen/home_page_tab_bar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

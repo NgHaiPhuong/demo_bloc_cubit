@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'home_page_tab_bar.dart';
+import '../presentation/home/screen/home_page_tab_bar.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
