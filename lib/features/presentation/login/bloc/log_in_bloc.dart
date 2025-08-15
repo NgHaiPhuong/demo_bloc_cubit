@@ -1,34 +1,17 @@
-import 'package:dome_ui2/features/data/models/user.dart';
+import 'package:dome_ui2/features/domain/usecases/log_in.dart';
 import 'package:dome_ui2/features/presentation/login/bloc/log_in_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../data/datasources/dio_client.dart';
-
 class LogInCubit extends Cubit<LogInState> {
-  LogInCubit() : super(LogInInitial());
+  final LogInUserCase logInUserCase;
+
+  LogInCubit(this.logInUserCase) : super(LogInInitial());
 
   Future<void> login(String email, String password) async {
     emit(LogInLoading());
     try {
-      // Gọi GET để tìm user theo email
-      final response = await DioClient.dio.get(
-        'users',
-        queryParameters: {"email": email},
-      );
-
-      if (response.statusCode == 200 &&
-          response.data is List &&
-          response.data.isNotEmpty) {
-        final user = response.data[0];
-        final List<UserModel> list = [];
-        if (user['password'] == password) {
-          emit(LogInSuccess("Đăng nhập thành công!", list));
-        } else {
-          emit(LogInError("Sai mật khẩu!"));
-        }
-      } else {
-        emit(LogInError("Không tìm thấy tài khoản!"));
-      }
+      final user = await logInUserCase(email, password);
+      emit(LogInSuccess("Đăng nhập thành công", [user]));
     } catch (e) {
       emit(LogInError("Lỗi: ${e.toString()}"));
     }

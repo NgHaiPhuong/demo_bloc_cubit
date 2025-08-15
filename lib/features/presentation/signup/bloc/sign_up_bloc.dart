@@ -1,28 +1,22 @@
 import 'package:dome_ui2/core/utils/dialog.dart';
-import 'package:dome_ui2/features/data/datasources/dio_client.dart';
 import 'package:dome_ui2/features/data/models/user.dart';
+import 'package:dome_ui2/features/domain/usecases/sign_up.dart';
 import 'package:dome_ui2/features/presentation/signup/bloc/sign_up_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
-  SignUpCubit() : super(SignUpInitial());
+  final SignUpUserCase signUpUserCase;
+
+  SignUpCubit(this.signUpUserCase) : super(SignUpInitial());
 
   Future<void> register(String email, String password) async {
     emit(SignUpLoading());
     try {
-      final response = await DioClient.dio.post(
-        'users', // endpoint của MockAPI
-        data: {"email": email, "password": password},
-      );
-
+      final user = await signUpUserCase.call(email, password);
       final List<UserModel> list = [];
-
-      if (response.statusCode == 201) {
-        emit(SignUpSuccess("Đăng ký thành công!", list));
-      } else {
-        emit(SignUpError("Đăng ký thất bại!"));
-      }
+      list.add(user);
+      emit(SignUpSuccess("Đăng ký thành công!", list));
     } catch (e) {
       emit(SignUpError("Lỗi: ${e.toString()}"));
     }

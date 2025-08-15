@@ -1,5 +1,8 @@
 import 'package:dome_ui2/features/data/datasources/user_data_sources.dart';
 import 'package:dome_ui2/features/data/repositories/user_repository_impl.dart';
+import 'package:dome_ui2/features/domain/usecases/log_in.dart';
+import 'package:dome_ui2/features/domain/usecases/show_list.dart';
+import 'package:dome_ui2/features/domain/usecases/sign_up.dart';
 import 'package:dome_ui2/features/domain/usecases/update_user.dart';
 import 'package:dome_ui2/features/presentation/edit_user/bloc/edit_user_bloc.dart';
 import 'package:dome_ui2/features/presentation/home/screen/home_page_tab_bar.dart';
@@ -21,13 +24,17 @@ void main() {
 
   final userRemoteDataSource = UserRemoteDataSource();
   final userRepository = UserRepositoryImpl(userRemoteDataSource);
+
   final updateUserUseCase = UpdateUser(userRepository);
+  final logInUserCase = LogInUserCase(userRepository);
+  final showListUserCase = ShowListUserCase(userRepository);
+  final signUpUserCase = SignUpUserCase(userRepository);
 
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (_) => EditUserCubit(updateUserUseCase)),
-    BlocProvider(create: (_) => LogInCubit()),
-    BlocProvider(create: (_) => ShowListCubit()),
-    BlocProvider(create: (_) => SignUpCubit()),
+    BlocProvider(create: (_) => LogInCubit(logInUserCase)),
+    BlocProvider(create: (_) => ShowListCubit(showListUserCase)),
+    BlocProvider(create: (_) => SignUpCubit(signUpUserCase)),
   ], child:  const MyApp()));
 }
 
