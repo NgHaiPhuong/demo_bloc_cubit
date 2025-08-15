@@ -52,6 +52,12 @@ class ShowDialog {
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Đóng dialog
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => MyHomePage(currentTab: 0),
+                  ),
+                      (Route<dynamic> route) => false,
+                );
               },
               child: const Text('OK'),
             ),

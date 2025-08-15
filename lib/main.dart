@@ -4,14 +4,15 @@ import 'package:dome_ui2/features/domain/usecases/log_in.dart';
 import 'package:dome_ui2/features/domain/usecases/show_list.dart';
 import 'package:dome_ui2/features/domain/usecases/sign_up.dart';
 import 'package:dome_ui2/features/domain/usecases/update_user.dart';
-import 'package:dome_ui2/features/presentation/edit_user/bloc/edit_user_bloc.dart';
+import 'package:dome_ui2/features/presentation/edit_user/provider/edit_user_provider.dart';
+import 'package:dome_ui2/features/presentation/forgot_password/provider/forgot_provider.dart';
 import 'package:dome_ui2/features/presentation/home/screen/home_page_tab_bar.dart';
-import 'package:dome_ui2/features/presentation/login/bloc/log_in_bloc.dart';
-import 'package:dome_ui2/features/presentation/show_list/bloc/show_list_bloc.dart';
-import 'package:dome_ui2/features/presentation/signup/bloc/sign_up_bloc.dart';
+import 'package:dome_ui2/features/presentation/login/provider/log_in_provider.dart';
+import 'package:dome_ui2/features/presentation/show_list/provider/show_list_provider.dart';
+import 'package:dome_ui2/features/presentation/signup/provider/sign_up_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,12 +31,18 @@ void main() {
   final showListUserCase = ShowListUserCase(userRepository);
   final signUpUserCase = SignUpUserCase(userRepository);
 
-  runApp(MultiBlocProvider(providers: [
-    BlocProvider(create: (_) => EditUserCubit(updateUserUseCase)),
-    BlocProvider(create: (_) => LogInCubit(logInUserCase)),
-    BlocProvider(create: (_) => ShowListCubit(showListUserCase)),
-    BlocProvider(create: (_) => SignUpCubit(signUpUserCase)),
-  ], child:  const MyApp()));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => LogInProvider(logInUserCase)),
+        ChangeNotifierProvider(create: (_) => ShowListProvider(showListUserCase),),
+        ChangeNotifierProvider(create: (_) => EditUserProvider(updateUserUseCase),),
+        ChangeNotifierProvider(create: (_) => ForgotProvider()),
+        ChangeNotifierProvider(create: (_) => SignUpProvider(signUpUserCase)),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
