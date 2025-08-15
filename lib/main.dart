@@ -1,12 +1,14 @@
-import 'package:dome_ui2/bloc/edit_user_bloc/edit_user_bloc.dart';
-import 'package:dome_ui2/bloc/log_in_bloc/log_in_bloc.dart';
-import 'package:dome_ui2/bloc/show_list_bloc/show_list_bloc.dart';
-import 'package:dome_ui2/bloc/sign_up_bloc/sign_up_bloc.dart';
+import 'package:dome_ui2/features/data/datasources/user_data_sources.dart';
+import 'package:dome_ui2/features/data/repositories/user_repository_impl.dart';
+import 'package:dome_ui2/features/domain/usecases/update_user.dart';
+import 'package:dome_ui2/features/presentation/edit_user/bloc/edit_user_bloc.dart';
+import 'package:dome_ui2/features/presentation/home/screen/home_page_tab_bar.dart';
+import 'package:dome_ui2/features/presentation/login/bloc/log_in_bloc.dart';
+import 'package:dome_ui2/features/presentation/show_list/bloc/show_list_bloc.dart';
+import 'package:dome_ui2/features/presentation/signup/bloc/sign_up_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../presentation/home/screen/home_page_tab_bar.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,8 +19,12 @@ void main() {
     ),
   );
 
+  final userRemoteDataSource = UserRemoteDataSource();
+  final userRepository = UserRepositoryImpl(userRemoteDataSource);
+  final updateUserUseCase = UpdateUser(userRepository);
+
   runApp(MultiBlocProvider(providers: [
-    BlocProvider(create: (_) => EditUserCubit()),
+    BlocProvider(create: (_) => EditUserCubit(updateUserUseCase)),
     BlocProvider(create: (_) => LogInCubit()),
     BlocProvider(create: (_) => ShowListCubit()),
     BlocProvider(create: (_) => SignUpCubit()),

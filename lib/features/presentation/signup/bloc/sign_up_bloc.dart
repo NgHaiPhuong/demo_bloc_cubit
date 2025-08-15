@@ -1,10 +1,9 @@
-import 'package:dome_ui2/bloc/sign_up_bloc/sign_up_state.dart';
-import 'package:dome_ui2/dialog/dialog.dart';
+import 'package:dome_ui2/core/utils/dialog.dart';
+import 'package:dome_ui2/features/data/datasources/dio_client.dart';
+import 'package:dome_ui2/features/data/models/user.dart';
+import 'package:dome_ui2/features/presentation/signup/bloc/sign_up_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../dio/dio.dart';
-import '../../data/models/user.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
   SignUpCubit() : super(SignUpInitial());

@@ -1,4 +1,4 @@
-import '../../data/models/user.dart';
+import 'package:dome_ui2/features/data/models/user.dart';
 
 class LogInState {
   final bool obscureText;

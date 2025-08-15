@@ -1,8 +1,8 @@
+import 'package:dome_ui2/features/data/models/user.dart';
+import 'package:dome_ui2/features/presentation/login/bloc/log_in_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../dio/dio.dart';
-import '../../data/models/user.dart';
-import 'log_in_state.dart';
+import '../../../data/datasources/dio_client.dart';
 
 class LogInCubit extends Cubit<LogInState> {
   LogInCubit() : super(LogInInitial());

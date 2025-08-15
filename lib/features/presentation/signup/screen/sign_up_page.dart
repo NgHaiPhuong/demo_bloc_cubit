@@ -1,9 +1,8 @@
-import 'package:dome_ui2/bloc/sign_up_bloc/sign_up_bloc.dart';
+import 'package:dome_ui2/core/utils/color.dart';
+import 'package:dome_ui2/features/presentation/signup/bloc/sign_up_bloc.dart';
+import 'package:dome_ui2/features/presentation/signup/bloc/sign_up_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../bloc/sign_up_bloc/sign_up_state.dart';
-import '../core/utils/color.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});

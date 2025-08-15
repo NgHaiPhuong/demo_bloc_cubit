@@ -1,5 +1,5 @@
-import 'package:dome_ui2/bloc/show_list_bloc/show_list_bloc.dart';
-import 'package:dome_ui2/bloc/show_list_bloc/show_list_state.dart';
+import 'package:dome_ui2/features/presentation/show_list/bloc/show_list_bloc.dart';
+import 'package:dome_ui2/features/presentation/show_list/bloc/show_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +13,6 @@ class ShowListUserPage extends StatefulWidget {
 }
 
 class _ShowListUserPageState extends State<ShowListUserPage> {
-
   @override
   void initState() {
     super.initState();

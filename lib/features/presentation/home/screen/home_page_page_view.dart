@@ -1,8 +1,8 @@
 import 'package:dome_ui2/core/utils/color.dart';
-import 'package:dome_ui2/screen/sign_up_page.dart';
+import 'package:dome_ui2/features/presentation/signup/screen/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
-import '../../../screen/login_page.dart';
+import '../../login/screen/login_page.dart';
 
 class MyHomePage2 extends StatefulWidget {
   const MyHomePage2({super.key});

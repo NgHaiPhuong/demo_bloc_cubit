@@ -1,14 +1,13 @@
-import 'package:dome_ui2/bloc/log_in_bloc/log_in_state.dart';
 import 'package:dome_ui2/core/utils/color.dart';
-import 'package:dome_ui2/dialog/dialog.dart';
-import 'package:dome_ui2/screen/show_list_user.dart';
+import 'package:dome_ui2/core/utils/dialog.dart';
+import 'package:dome_ui2/features/presentation/login/bloc/log_in_bloc.dart';
+import 'package:dome_ui2/features/presentation/login/bloc/log_in_state.dart';
+import 'package:dome_ui2/features/presentation/show_list/screen/show_list_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/log_in_bloc/log_in_bloc.dart';
-import '../bloc/sign_up_bloc/sign_up_state.dart';
-import '../presentation/forgot_password/screen/forgot_password.dart';
-import '../presentation/home/screen/home_page_tab_bar.dart';
+import '../../forgot_password/screen/forgot_password.dart';
+import '../../home/screen/home_page_tab_bar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

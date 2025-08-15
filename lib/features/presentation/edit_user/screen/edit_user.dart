@@ -1,9 +1,9 @@
+import 'package:dome_ui2/core/utils/color.dart';
+import 'package:dome_ui2/features/presentation/edit_user/bloc/edit_user_bloc.dart';
+import 'package:dome_ui2/features/presentation/edit_user/bloc/edit_user_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../bloc/edit_user_bloc/edit_user_bloc.dart';
-import '../../../bloc/edit_user_bloc/edit_user_state.dart';
-import '../../../core/utils/color.dart';
 import '../../../data/models/user.dart';
 
 class EditUserPage extends StatefulWidget {

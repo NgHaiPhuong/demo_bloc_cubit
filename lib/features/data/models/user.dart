@@ -1,3 +1,4 @@
+
 class UserModel {
   final String name;
   final String avatar;

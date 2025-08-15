@@ -1,5 +1,4 @@
-
-import '../../data/models/user.dart';
+import 'package:dome_ui2/features/data/models/user.dart';
 
 class SignUpState {
   final bool obscureTextPass;
@@ -57,5 +56,6 @@ class SignUpSuccess extends SignUpState {
 
 class SignUpError extends SignUpState {
   final String error;
+
   SignUpError(this.error);
 }
